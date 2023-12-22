@@ -1,8 +1,32 @@
+version: "3.7"
+
 services:
-  web:
-    build: .
+  rails:
+    build:
+      context: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/myapp
+    environment:
+      DB_USERNAME: postgres
+      DB_DATABASE: password
+      DB_PORT: 5432
+      DB_HOST: db
+      RAILS_MAX_THREADS: 5
+      PORT: 3000
     ports:
-      - "3000:3000"
+      - 3000:3000
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: postgres:10.12-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
