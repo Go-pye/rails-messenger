@@ -1,0 +1,30 @@
+<div>
+  <h1 class="font-bold text-4xl">Conversations</h1>
+  <br>
+  <div class="overflow-x-auto">
+    <table class="min-w-full leading-normal">
+      <% @conversations.each do |convo| %>
+        <tr class="border-t border-gray-200">
+          <td class="px-5 py-5 bg-white text-sm">
+            <div class="flex items-center">
+              <div class="ml-3">
+                <p class="text-gray-900 whitespace-no-wrap">
+                  <%#
+                  should be:
+
+                  user who conv with
+                  content trucated last msg
+                  timestamp last sent msg
+
+                  can clink and see whole conv
+                  %>
+                  <%= convo.id %>: <%= convo.updated_at %>
+                </p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
