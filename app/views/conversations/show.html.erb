@@ -1,14 +1,16 @@
-<div data-controller="chat" data-chat-conversation-id="<%= @conversation.id %>">
+<div data-controller="chat" data-chat-conversation-id="<%= @conversation.id %>" class="flex flex-col h-screen">
   <h1 class="font-bold text-4xl">Conversations</h1>
   <br>
 
-  <div class="chat-container flex flex-col space-y-2 p-3" data-chat-target="messages">
+  <div class="chat-container flex-1 overflow-y-auto flex flex-col space-y-2 p-3" data-chat-target="messages">
       <%= render partial: "messages/message", collection: @messages, as: :message, locals: { user: current_user } %>
   </div>
 
-  <form data-action="submit->chat#send">
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <input type="text" data-chat-target="input" class="form-input" placeholder="Type a message...">
-    <button type="submit" class="btn">Send</button>
-  </form>
+  <div class="sticky bottom-0 bg-white p-3">
+    <form data-action="submit->chat#send">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="text" data-chat-target="input" class="form-input w-full md:w-2/3 lg:w-3/4" placeholder="Type a message...">
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </div>
 </div>

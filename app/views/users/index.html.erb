@@ -14,9 +14,9 @@
               </div>
               <div>
                 <% if conversation = current_user.conversation_with(user) %>
-                  <%= link_to 'Conversation', conversation_path(conversation.id), class: 'btn btn-primary' %>
+                  <%= link_to 'Chat', conversation_path(conversation.id), class: 'btn btn-primary' %>
                 <% else %>
-                  <%= button_to 'Start Conversation', conversations_path(conversation:{user_id: user.id}), method: :post, class: 'btn btn-primary' %>
+                  <%= button_to 'Chat', conversations_path(conversation:{user_id: user.id}), method: :post, class: 'btn btn-primary' %>
                 <% end %>
               </div>
             </div>
