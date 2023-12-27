@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'messages/create'
   get 'users/index'
 
-  resources :conversation, only: [:index, :show, :create] do
+  resources :conversations, only: [:index, :show, :create] do
     resources :messages, only: [:create]
   end
 

@@ -36,7 +36,7 @@ export default class extends Controller {
     if (messageContent.length === 0) return;
     
     const conversationId = this.data.get("conversationId");
-    fetch(`/conversation/${conversationId}/messages`, {
+    fetch(`/conversations/${conversationId}/messages`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

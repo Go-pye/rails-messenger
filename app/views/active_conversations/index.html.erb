@@ -5,7 +5,7 @@
     <table class="min-w-full leading-normal">
       <% @active_conversations.each do |convo| %>
         <% last_message = convo.messages.last %>
-        <%= render 'conversation/conversation_row', conversation: convo, last_message: last_message %>
+        <%= render 'conversations/conversation_row', conversation: convo, last_message: last_message %>
       <% end %>
     </table>
   </div>
