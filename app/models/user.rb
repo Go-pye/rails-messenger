@@ -4,5 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :messages
+  has_many :conversations, through: :messages
+
+  has_many :initiated_conversations, class_name: 'Conversation', foreign_key: 'participant1_id'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'participant2_id'
+
   scope :all_except, ->(user)  { where.not(id: user) }
+
+  def conversations
+    Conversation.where("participant1_id = ? OR participant2_id = ?", self.id, self.id)
+  end
 end
