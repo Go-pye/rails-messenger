@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'home/index'
 
-  resources :conversation, only: [:index, :show, :create, :update] do
+  resources :conversation, only: [:index, :show, :create] do
     resources :messages, only: [:create]
   end
 

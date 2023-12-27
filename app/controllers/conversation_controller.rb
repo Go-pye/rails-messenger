@@ -19,12 +19,9 @@ class ConversationController < ApplicationController
     if @conversation.save
       redirect_to conversation_path(@conversation)
     else
-      # set flash message
-      # redirect_back 
+      flash.now[:alert] = "I'm sorry an error occurred while creating this conversation"
+      redirect_back(fallback_location: root_path)
     end
-  end
-
-  def update
   end
 
   private
