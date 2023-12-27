@@ -1,0 +1,33 @@
+<tr class="border-t border-gray-200">
+  <td class="px-5 py-5 bg-white text-sm">
+    <div class="flex items-center justify-between">
+      <div class="flex flex-col justify-between w-full">
+        <div class="flex justify-between">
+          <p class="text-gray-900 whitespace-no-wrap">
+            <strong>
+              <% if conversation.participant1 == current_user %>
+                <%= link_to conversation.participant2.email, conversation_path(conversation) %>
+              <% else %>
+                <%= link_to conversation.participant1.email, conversation_path(conversation) %>
+              <% end %>
+            </strong>
+          </p>
+          <% if last_message %>
+            <p class="text-gray-900 whitespace-no-wrap">
+              <% if last_message.updated_at.today? %>
+                <%= link_to last_message.updated_at.strftime("%H:%M"), conversation_path(conversation) %>
+              <% else %>
+                <%= link_to last_message.updated_at.strftime("%m/%d/%y"), conversation_path(conversation) %>
+              <% end %>
+            </p>
+          <% end %>
+        </div>
+        <% if last_message %>
+          <p class="text-gray-600 text-xs whitespace-no-wrap">
+            <%= link_to truncate(last_message.content, length: 50), conversation_path(conversation) %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </td>
+</tr>
