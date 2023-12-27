@@ -11,10 +11,11 @@ RSpec.describe "Conversations", type: :request do
     end
 
     context 'user is signed in' do
+      let(:user) { FactoryBot.create(:user) }
       before do
-        user = FactoryBot.create(:user)
         sign_in user
       end
+
       it 'loads users index page' do
         get "/users/index"
         expect(response).to have_http_status(:success)
