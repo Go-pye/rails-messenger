@@ -1,0 +1,12 @@
+<div>
+  <h1 class="font-bold text-4xl">Active Conversations</h1>
+  <br>
+  <div class="overflow-x-auto">
+    <table class="min-w-full leading-normal">
+      <% @active_conversations.each do |convo| %>
+        <% last_message = convo.messages.last %>
+        <%= render 'conversation/conversation_row', conversation: convo, last_message: last_message %>
+      <% end %>
+    </table>
+  </div>
+</div>
