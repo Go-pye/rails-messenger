@@ -8,6 +8,7 @@ class ConversationsController < ApplicationController
   def show
     @conversation = Conversation.find(params[:id])
     @messages = @conversation.messages
+    @other_user = User.find(@conversation.other_user(current_user.id))
   end
 
   def create

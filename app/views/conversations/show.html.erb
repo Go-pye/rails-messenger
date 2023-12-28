@@ -1,5 +1,5 @@
 <div data-controller="chat" data-chat-conversation-id="<%= @conversation.id %>" class="flex flex-col h-screen">
-  <h1 class="font-bold text-4xl">Conversations</h1>
+  <h1 class="font-bold text-3xl"><%= @other_user.email %></h1>
   <br>
 
   <div class="chat-container flex-1 overflow-y-auto flex flex-col space-y-2 p-3" data-chat-target="messages">

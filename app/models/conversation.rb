@@ -10,4 +10,7 @@ class Conversation < ApplicationRecord
     .distinct
   }
 
+  def other_user(current_user_id)
+    current_user_id == participant1_id ? participant2_id : participant1_id
+  end
 end
