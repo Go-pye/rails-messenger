@@ -26,17 +26,23 @@ RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
+RUN groupadd -r rails && useradd -r -g rails rails
+
 # Copy application code
 COPY . .
 
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+# Change ownership of the /rails directory to the rails user
+RUN chown -R rails:rails /rails
+
 # must run this before we build the image
+COPY entrypoint.sh /usr/bin/
 RUN chmod +x entrypoint.sh
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
 # Final stage for app image
@@ -69,8 +75,8 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Run entrypoint.sh script
-CMD ["./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
