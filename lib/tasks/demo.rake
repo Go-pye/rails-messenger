@@ -3,7 +3,7 @@ namespace :demo do
   task setup: :environment do
     # main test user
     puts "creating users...."
-    tester = User.create(email: 'te1ster@test.com', password: 'password')
+    tester = User.create(email: 'tester@test.com', password: 'password')
 
     10.times do
       User.create(email: Faker::Internet.email, password: 'password')
