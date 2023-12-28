@@ -1,4 +1,5 @@
 # README
+Messaging app using Ruby on Rails, Hotwire, stimulusjs, tailwindcss.
 
 ## docker setup
 `docker compose build`
